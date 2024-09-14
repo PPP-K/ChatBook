@@ -1,0 +1,20 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Blog Post {% endblock %}
+    {% block content %}
+    <legend class="border-bottom mb-4 text-center d-inline p-2 text-primary"> Blog Post in ChatBook</legend>
+        <div class="content-section">
+            <form method="post">
+                {% csrf_token %}
+                <fieldset class="text-center">
+                    
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary" type="submit">
+                        Post
+                    </button>
+                </div>
+            </form>
+        </div>
+    {% endblock content %}

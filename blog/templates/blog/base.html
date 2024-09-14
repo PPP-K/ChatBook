@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'blog/main.css' %}">
+    <title>{% block title %}{% endblock title %}</title>
+
+</head>
+
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color: #274390">
+        <form class="form-inline">
+            <a class="btn btn-outline-primary" href="{%  url 'blog-home' %}"><i class="fas fa-vote-yea">PK</i></a>
+        </form>
+        <div class="container">
+          <a class="navbar-brand mr-3 " id="site" href="{% url 'blog-home' %}"><i class="fas fa-vote-yea">ChatBook</i></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class=" nav-link {% if request.resolver_match.url_name == 'blog-home' %}active{% endif %} mr-3"
+                     id="both" href="{% url 'blog-home' %}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-3 {% if request.resolver_match.url_name == 'blog-about' %}active{% endif %}"
+                     id="both" href="{% url 'blog-about' %}">About</a>
+                </li>
+                {% endif %}
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link mr-3 {% if request.resolver_match.url_name == 'profile' %}active{% endif %} "
+                     id="both" href="{% url 'profile' %}">Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-3 {% if request.resolver_match.url_name == 'post-create' %}active{% endif %}"
+                     id="both" href="{% url 'post-create' %}">New Post</a>
+                </li>
+                <form method="POST" action="{% url 'logout' %}">
+                  {% csrf_token %}
+                  <li class="nav-item">
+                    <button  class=" btn btn-link text-white mr-3">
+                          Logout</button>
+                  </li>
+                </form>
+            </div>
+            <div class="navbar-nav">
+                          
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link mr-3 {% if request.resolver_match.url_name == 'login' %}active{% endif %} "
+                     id="both" href="{% url 'login' %}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link mr-3 {% if request.resolver_match.url_name == 'register' %}active{% endif %}"
+                     id="register" href="{% url 'register' %}">Sign Up</a>
+                </li>
+                {% endif %}
+            </div>
+          </div>
+        </div>
+      </nav>
+</header><br>
+    <main role="main" class="container">
+      <div class="row justify-content-center">
+        <div class="col-4">
+          {% if messages %}
+              {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        
+          {% block content %}
+          {% endblock %}
+        </div>
+          {% if user.is_authenticated %}
+  
+          {% else %}
+        <div class="col-3">
+          <div class="content-section">
+            <h3>Message from Creator</h3>
+            <p class='text-muted'>
+                If You like this please give it a star :<br/>
+                Check my other profiles as well : My ID
+              <ul class="list-group">
+                <a href="https://github.com/PPP-K" class="text-decoration-none"><li class="list-group-item list-group-item-light btn btn-primary">GitHub</li></a>
+                <a href="https://www.linkedin.com/in/priyanshu-kumar-849a8a263" class="text-decoration-none"><li class="list-group-item list-group-item-light btn btn-primary">Linkdin</li></a>
+                <a href="https://www.facebook.com/priyanshu.gangwar.1806?mibextid=ZbWKwL" class="text-decoration-none"><li class="list-group-item list-group-item-light btn btn-primary">Facebook</li></a>
+                <a href="https://instagram.com/priyanshuppp?igshid=NTc4MTIwNjQ2YQ==" class="text-decoration-none"><li class="list-group-item list-group-item-light btn btn-primary">Instagram</li></a>
+                </ul>
+            </p>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+</main>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
+

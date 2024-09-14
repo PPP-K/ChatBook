@@ -1,0 +1,26 @@
+{% extends "blog/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %} Sign Up {% endblock %}
+    {% block content %}
+
+    <legend class="border-bottom mb-4 text-center d-inline p-2 text-primary text-white"> Sign Up In ChatBook </legend>
+        <div class="content-section">
+            <form method="post">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    
+                        {{ form|crispy }}
+                </fieldset>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary" type="submit">
+                        Sign Up
+                    </button>
+                </div>
+            </form>
+        <div class="text-center">
+            <small class="text-muted">
+                Already Have An Account? <a href="{% url 'login' %}" class="ml-2">Sign In</a>
+            </small>
+        </div>
+        </div>
+    {% endblock content %}
