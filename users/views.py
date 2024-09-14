@@ -18,19 +18,6 @@ def register(request):
     context = {'form': form}
     return render(request, 'users/register.html', context)
 
-def login(request):
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            messages.info(request, f' Your Account Created for {username}! You can login now')
-            return redirect('blog/home')
-    else:
-        form = LoginForm()
-    context = {'form': form}
-    return render(request, 'users/login.html', context)
-
 def logout(request):
     return render(request,'users/logout.html')
 
