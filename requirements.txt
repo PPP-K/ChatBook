@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 asgiref==3.8.1
 beautifulsoup4==4.12.3
 crispy-bootstrap4==2024.1
@@ -21,3 +22,28 @@ sqlparse==0.4.1
 tzdata==2024.1
 virtualenv==20.26.5
 whitenoise==6.7.0
+=======
+asgiref==3.8.1
+beautifulsoup4==4.12.3
+crispy-bootstrap4==2024.1
+crispy-bootstrap5==2024.2
+distlib==0.3.8
+Django==5.1
+django-allauth==64.2.1
+django-bootstrap4==24.3
+django-crispy-forms==2.3
+django-environ==0.11.2
+django-tinymce==4.1.0
+filelock==3.16.1
+gunicorn==23.0.0
+packaging==24.1
+pillow==10.4.0
+platformdirs==4.3.6
+python-dotenv==1.0.1
+pytz==2021.1
+soupsieve==2.6
+sqlparse==0.4.1
+tzdata==2024.1
+virtualenv==20.26.5
+whitenoise==6.7.0
+>>>>>>> 180832f03beef90710a90ca6b4065224a01bc9c5
