@@ -21,7 +21,7 @@ def home(request):
 
 class PostListView(LoginRequiredMixin, ListView):
     model = Post
-    template_name = 'blog/home.html'
+    template_name = 'blog/index.html'
     context_object_name = 'posts'
     ordering = ['-date_posted']
     paginate_by = 4
